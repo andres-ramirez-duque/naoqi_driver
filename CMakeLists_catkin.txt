@@ -27,6 +27,8 @@ find_package(OpenCV)
 find_package(orocos_kdl)
 
 add_definitions(-DLIBQI_VERSION=${naoqi_libqi_VERSION_MAJOR}${naoqi_libqi_VERSION_MINOR})
+message(STATUS "qlib version Major: ${naoqi_libqi_VERSION_MAJOR}")
+message(STATUS "qlib version Minor: ${naoqi_libqi_VERSION_MINOR}")
 
 catkin_package(LIBRARIES naoqi_driver_module naoqi_driver)
 

@@ -368,7 +368,10 @@ bool& setBehavior( const qi::SessionPtr& session )
   try{
     qi::AnyObject p_behavior = session->service("ALBehaviorManager");
     p_behavior.call<void>("stopAllBehaviors");
-    
+    std::cout << "Stoping all behaviors on NAO" << std::endl;
+    qi::AnyObject p_text_to_speech = session->service("ALTextToSpeech");
+    p_text_to_speech.call<void>("stopAll");
+    std::cout << "Stoping all speech task" << std::endl;
     success = true;
     return success;
   }

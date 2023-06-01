@@ -92,7 +92,10 @@ int main(int argc, char** argv)
   }
 
   std::cout << BOLDYELLOW << "naoqi_driver initialized" << RESETCOLOR << std::endl;
-  app.run();
+  //app.run();
+  while (ros::ok()){
+  }
+  std::cout << BOLDRED << "App run only stop with crt+c" << RESETCOLOR << std::endl;
   bs->stopService();
   app.session()->close();
   return 0;
