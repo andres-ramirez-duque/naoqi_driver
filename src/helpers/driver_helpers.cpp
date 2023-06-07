@@ -380,6 +380,43 @@ bool& setBehavior( const qi::SessionPtr& session )
     return success;
   }
 }
+/** Function that sets volume for robot
+ */
+bool& setVolume( const qi::SessionPtr& session, naoqi_bridge_msgs::SetFloatRequest req)
+{
+  static bool success;
+  
+  try{
+    qi::AnyObject p_audio_device = session->service("ALAudioDevice");
+    int volume = req.data;
+    p_audio_device.call<void>("setOutputVolume", volume);
+    std::cout << "Receiving service call of setting volume" << std::endl;
+    success = true;
+    return success;
+  }
+  catch(const std::exception& e){
+    std::cout << "Caught " << e.what() << std::endl;
+    success = false;
+    return success;
+  }
+}
+
+/** Function that gets volume for robot
+ */
+int& getVolume( const qi::SessionPtr& session)
+{
+  static int volume;
+  
+  try{
+    qi::AnyObject p_audio_device = session->service("ALAudioDevice");
+    volume = p_audio_device.call<int>("getOutputVolume");
+    std::cout << "Receiving service call of getting volume" << std::endl;
+    return volume;
+  }
+  catch(const std::exception& e){
+    return volume;
+  }
+}
 } // driver
 } // helpers
 } // naoqi

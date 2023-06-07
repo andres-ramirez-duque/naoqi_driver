@@ -25,6 +25,7 @@
 
 #include <naoqi_bridge_msgs/SetString.h>
 #include <naoqi_bridge_msgs/SetFloat.h>
+#include <naoqi_bridge_msgs/GetFloat.h>
 
 #include <qi/applicationsession.hpp>
 
@@ -56,6 +57,10 @@ std::vector<std::string>& getBehavior( const qi::SessionPtr& session );
 bool isDepthStereo(const qi::SessionPtr &session);
 
 bool& setBehavior( const qi::SessionPtr& session );
+
+bool& setVolume( const qi::SessionPtr& session, naoqi_bridge_msgs::SetFloatRequest req );
+
+int& getVolume( const qi::SessionPtr& session);
 
 } // driver
 } // helpers
