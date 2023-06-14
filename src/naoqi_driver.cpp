@@ -41,6 +41,7 @@
 #include "converters/log.hpp"
 #include "converters/odom.hpp"
 #include "converters/end_speech.hpp"
+#include "converters/battery.hpp"
 
 /*
  * PUBLISHERS
@@ -99,6 +100,7 @@
 #include "event/audio.hpp"
 #include "event/touch.hpp"
 #include "event/endspeech.hpp"
+#include "event/battery.hpp"
 
 /*
  * STATIC FUNCTIONS INCLUDE
@@ -617,6 +619,7 @@ void Driver::registerDefaultConverter()
   bool head_enabled                   = boot_config_.get( "converters.touch_head.enabled", true);
   
   bool end_speech_enabled             = boot_config_.get( "converters.end_speech.enabled", true);
+  bool battery_enabled                = boot_config_.get( "converters.battery.enabled", true);
 
   // Load the correct variables depending on the type of the depth camera
   // (XTION or stereo). IR disabled if the robot uses a stereo camera to
@@ -914,6 +917,17 @@ void Driver::registerDefaultConverter()
     //if (publish_enabled_) {
     //  event_map_.find("end_speech")->second.isPublishing(true);
     //}
+  }
+  /****************************************** Battery Event *************************************************/
+  if ( battery_enabled )
+  {
+    std::string battery_events="BatteryChargeChanged";
+    boost::shared_ptr<BatteryEventRegister> event_register =
+      boost::make_shared<BatteryEventRegister>( battery_events, sessionPtr_, action_chain_msg_);
+    insertEventConverter("battery", event_register);
+    if (keep_looping) {
+      event_map_.find("battery")->second.startProcess();
+    }
   }
   
   /** Odom */

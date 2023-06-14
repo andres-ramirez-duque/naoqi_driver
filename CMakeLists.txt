@@ -21,6 +21,7 @@ set(
   src/converters/log.cpp
   src/converters/odom.cpp
   src/converters/end_speech.cpp
+  src/converters/battery.cpp
   )
 set(
   TOOLS_SRC
@@ -79,6 +80,7 @@ set(
   src/event/audio.cpp
   src/event/touch.cpp
   src/event/endspeech.cpp
+  src/event/battery.cpp
   )
 
 # use catkin if qibuild is not found
