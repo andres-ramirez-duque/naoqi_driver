@@ -354,9 +354,9 @@ bool& setAliveness( const qi::SessionPtr& session, naoqi_bridge_msgs::SetStringR
 std::vector<std::string>& getBehavior( const qi::SessionPtr& session )
 {
   static std::vector<std::string> behaviours;
-  std::cout << "Receiving service call of getting running behaviors" << std::endl;
+  std::cout << "Receiving service call of getting default behaviors" << std::endl;
   qi::AnyObject p_behavior = session->service("ALBehaviorManager");
-  behaviours = p_behavior.call<std::vector<std::string>>("getRunningBehaviors");
+  behaviours = p_behavior.call<std::vector<std::string>>("getDefaultBehaviors");//getRunningBehaviors
   return behaviours;
 }
 /** Function that sets ALBehaviorManager modules to a robot
@@ -372,6 +372,24 @@ bool& setBehavior( const qi::SessionPtr& session )
     qi::AnyObject p_text_to_speech = session->service("ALTextToSpeech");
     p_text_to_speech.call<void>("stopAll");
     std::cout << "Stoping all speech task" << std::endl;
+    success = true;
+    return success;
+  }
+  catch(const std::exception& e){
+    success = false;
+    return success;
+  }
+}
+/** Function that remove the given behavior from the default behaviors
+ */
+bool& removeDefaultBehavior( const qi::SessionPtr& session, naoqi_bridge_msgs::SetStringRequest req)
+{
+  static bool success;
+  std::cout << "Receiving service call of removing default behaviors on NAO" << std::endl;
+  try{
+    qi::AnyObject p_behavior = session->service("ALBehaviorManager");
+    p_behavior.call<void>("removeDefaultBehavior", req.data);
+    std::cout << "removing default behavior: "<< req.data.c_str() << " on NAO" << std::endl;
     success = true;
     return success;
   }

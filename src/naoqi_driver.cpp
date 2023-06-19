@@ -80,6 +80,7 @@
 #include "services/set_aliveness.hpp"
 #include "services/get_behavior.hpp"
 #include "services/set_behavior.hpp"
+#include "services/remove_default_behavior.hpp"
 #include "services/set_volume.hpp"
 #include "services/get_volume.hpp"
 
@@ -994,6 +995,7 @@ void Driver::registerDefaultServices()
   registerService( boost::make_shared<service::SetAlivenessService>("set_aliveness", "/naoqi_driver/set_aliveness", sessionPtr_) );
   registerService( boost::make_shared<service::GetBehaviorService>("get_behavior", "/naoqi_driver/get_behavior", sessionPtr_) );
   registerService( boost::make_shared<service::SetBehaviorService>("set_behavior", "/naoqi_driver/set_behavior", sessionPtr_) );
+  registerService( boost::make_shared<service::RemoveDefaultBehaviorService>("remove_default_behavior", "/naoqi_driver/remove_default_behavior", sessionPtr_) );
   registerService( boost::make_shared<service::SetVolumeService>("set_volume", "/naoqi_driver/set_volume", sessionPtr_) );
   registerService( boost::make_shared<service::GetVolumeService>("get_volume", "/naoqi_driver/get_volume", sessionPtr_) );
 }

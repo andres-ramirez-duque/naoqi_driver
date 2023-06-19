@@ -58,6 +58,8 @@ bool isDepthStereo(const qi::SessionPtr &session);
 
 bool& setBehavior( const qi::SessionPtr& session );
 
+bool& removeDefaultBehavior( const qi::SessionPtr& session, naoqi_bridge_msgs::SetStringRequest req);
+
 bool& setVolume( const qi::SessionPtr& session, naoqi_bridge_msgs::SetFloatRequest req );
 
 int& getVolume( const qi::SessionPtr& session);

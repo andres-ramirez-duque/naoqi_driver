@@ -57,6 +57,7 @@ set(
   src/services/set_aliveness.cpp
   src/services/get_behavior.cpp
   src/services/set_behavior.cpp
+  src/services/remove_default_behavior.cpp
   src/services/set_volume.cpp
   src/services/get_volume.cpp
   )
